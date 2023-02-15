@@ -7,7 +7,6 @@ pipeline {
         sh 'g++ -o hello hello.cpp'
         echo 'Build stage successful.'
       }
-      /*
     }
     
     stage('Test') {
@@ -27,16 +26,15 @@ pipeline {
         sh 'mvn test'
       }
     }
-  /*  
     stage('Deploy') {
       steps {
         sh 'scp target/myapp.war user@remote-server:/opt/tomcat/webapps/'
       }
     }
-  } */
-  post{
+    post{
         failure{
             echo 'Pipeline failed'
         }
     }
+  }
 }
