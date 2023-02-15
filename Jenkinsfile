@@ -2,15 +2,22 @@ pipeline {
   agent any
   
   stages {
-    stage('Clone') {
+    stage('Build') {
       steps {
-        git branch: 'main', url: 'https://github.com/Bansod/PES2UG20CS398_Jenkins.git'
+        sh 'g++ -o hello hello.cpp'
+        echo 'Build stage successful.'
       }
     }
     
-    stage('Build') {
+    stage('Test') {
       steps {
-        sh 'mvn clean package'
+        sh './hello'
+        echo 'Test stage successful.'
+        post{
+                    always{
+                        junit 'target/surefire-reports/*.xml'
+                    }
+        }
       }
     }
     
@@ -26,4 +33,9 @@ pipeline {
       }
     }
   }
+  //post{
+  //      failure{
+   //         echo 'Pipeline failed'
+   //     }
+   // }
 }
