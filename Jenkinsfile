@@ -26,16 +26,16 @@ pipeline {
         sh 'mvn test'
       }
     }
-    
+  /*  
     stage('Deploy') {
       steps {
         sh 'scp target/myapp.war user@remote-server:/opt/tomcat/webapps/'
       }
-    }
+    }*/
   }
-  //post{
-  //      failure{
-   //         echo 'Pipeline failed'
-   //     }
-   // }
+  post{
+        failure{
+            echo 'Pipeline failed'
+        }
+    }
 }
